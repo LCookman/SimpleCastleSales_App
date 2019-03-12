@@ -21,3 +21,8 @@ Design: ~2hrs
 MVP: ~20hrs
 
 Testing: ~2hrs
+
+## Building the Project and Running Tests
+To build the project simply open up the solution in Visual Studio and hit `Ctrl` + `F5`
+
+To run the tests open a console in the root of the project and type in `dotnet test`
