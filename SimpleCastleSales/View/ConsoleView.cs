@@ -289,7 +289,10 @@ namespace SimpleCastleSales.View
 					case 1:
 						// View all castles
 						castleList = OnSearchAllEvent ();
-						WishlistAdditionCastleView (castleList);
+						if (!ConsoleUtil.CheckEmptyWishlist (castleList.Count))
+						{
+							WishlistAdditionCastleView (castleList);
+						}
 						break;
 
 					case 2:
@@ -297,7 +300,10 @@ namespace SimpleCastleSales.View
 						ConsoleDisplay.DisplayCastleSearchByCharacteristic ();
 						searchParams = Console.ReadLine ();
 						castleList = OnCharacteristicSearch (searchParams);
-						WishlistAdditionCastleView (castleList);
+						if (!ConsoleUtil.CheckEmptyWishlist (castleList.Count))
+						{
+							WishlistAdditionCastleView (castleList);
+						}
 						break;
 
 					case 3:
@@ -322,9 +328,9 @@ namespace SimpleCastleSales.View
 			}
 			else
 			{
-				ConsoleDisplay.FormatAndDisplayCastles (castleList);
+				ConsoleDisplay.FormatAndDisplayCastles ("Castle List View", castleList);
+				ConsoleDisplay.WaitOnWishlistView ();
 			}
-			ConsoleDisplay.WaitOnWishlistView ();
 		}
 
 		/// <summary>
@@ -342,7 +348,7 @@ namespace SimpleCastleSales.View
 
 			while (!bExit)
 			{
-				ConsoleDisplay.FormatAndDisplayCastles (castlesInfo);
+				ConsoleDisplay.FormatAndDisplayCastles ("Wishlist View", castlesInfo);
 
 				do
 				{

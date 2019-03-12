@@ -60,5 +60,20 @@ namespace SimpleCastleSales.View.Utility
 			}
 			return answer;
 		}
+
+		/// <summary>
+		/// Check if the wishlist has more than 0 elements.
+		/// </summary>
+		/// <param name="castleInfoSize">The size of the wishlist</param>
+		/// <returns>True if the wishlist has zero elements false if there are elements.</returns>
+		public static bool CheckEmptyWishlist (int castleInfoSize)
+		{
+			bool bHasNoElements = castleInfoSize < 1;
+			if (bHasNoElements)
+			{
+				ConsoleDisplay.ErrorNoCastlesToDisplay ();
+			}
+			return bHasNoElements;
+		}
 	}
 }

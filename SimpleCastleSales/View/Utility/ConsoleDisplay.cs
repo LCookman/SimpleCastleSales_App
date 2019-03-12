@@ -6,6 +6,7 @@ namespace SimpleCastleSales.View.Utility
 	public class ConsoleDisplay
 	{
 		private static readonly string GENERIC_CONTINUE = "Press any key to continue...";
+		private static readonly string DESIGN_SEPARATOR = "--------------------------------";
 
 		/// <summary>
 		/// The static display methods for managing menus.
@@ -14,7 +15,9 @@ namespace SimpleCastleSales.View.Utility
 		public static void DisplayWelcomeMenu ()
 		{
 			Console.Clear ();
-			Console.WriteLine ("Welcome to the Castle Sales App. What would you like to do?");
+			Console.WriteLine (DESIGN_SEPARATOR);
+			Console.WriteLine ("Welcome to the Castle Sales App.");
+			Console.WriteLine (DESIGN_SEPARATOR);
 
 			Console.WriteLine ();
 			Console.WriteLine ("To use the app simply enter the number in front of the line ");
@@ -31,7 +34,9 @@ namespace SimpleCastleSales.View.Utility
 		public static void DisplayAccountMenu (string username)
 		{
 			Console.Clear ();
+			Console.WriteLine (DESIGN_SEPARATOR);
 			Console.WriteLine ("Welcome to your account {0}!", username);
+			Console.WriteLine (DESIGN_SEPARATOR);
 			Console.WriteLine ();
 			Console.WriteLine ("What would you like to do? Please select a value below.");
 			Console.WriteLine ("1. Add/Create Castle");
@@ -49,7 +54,9 @@ namespace SimpleCastleSales.View.Utility
 			const string ADDITION_PREFIX = "   + {0}";
 
 			Console.Clear ();
+			Console.WriteLine (DESIGN_SEPARATOR);
 			Console.WriteLine ("Castle Editor");
+			Console.WriteLine (DESIGN_SEPARATOR);
 			Console.WriteLine ("Current Castle Name: {0}", castleName);
 			Console.WriteLine ();
 			Console.WriteLine ("1. Edit Name");
@@ -86,7 +93,9 @@ namespace SimpleCastleSales.View.Utility
 		public static void DisplayCastleSearchMenu ()
 		{
 			Console.Clear ();
+			Console.WriteLine (DESIGN_SEPARATOR);
 			Console.WriteLine ("Castle Searching");
+			Console.WriteLine (DESIGN_SEPARATOR);
 			Console.WriteLine ();
 			Console.WriteLine ("1. View All Castles");
 			Console.WriteLine ("2. Search by Characteristics ('i.e. has a moat')");
@@ -113,7 +122,9 @@ namespace SimpleCastleSales.View.Utility
 		public static void DisplayCreateAccount ()
 		{
 			Console.Clear ();
+			Console.WriteLine (DESIGN_SEPARATOR);
 			Console.WriteLine ("Account Creation");
+			Console.WriteLine (DESIGN_SEPARATOR);
 		}
 
 		public static void DisplayEnterUsername ()
@@ -129,7 +140,9 @@ namespace SimpleCastleSales.View.Utility
 		public static void DisplayLogin ()
 		{
 			Console.Clear ();
+			Console.WriteLine (DESIGN_SEPARATOR);
 			Console.WriteLine ("Account Login");
+			Console.WriteLine (DESIGN_SEPARATOR);
 			Console.WriteLine ("Please Login with your Credentials.");
 		}
 
@@ -153,21 +166,27 @@ namespace SimpleCastleSales.View.Utility
 		public static void DisplayNameCastle ()
 		{
 			Console.Clear ();
+			Console.WriteLine (DESIGN_SEPARATOR);
 			Console.WriteLine ("Edit Castle Name");
+			Console.WriteLine (DESIGN_SEPARATOR);
 			Console.Write ("Enter a castle name: ");
 		}
 
 		public static void DisplayRoomAddition ()
 		{
 			Console.Clear ();
+			Console.WriteLine (DESIGN_SEPARATOR);
 			Console.WriteLine ("Room Addition");
+			Console.WriteLine (DESIGN_SEPARATOR);
 			Console.Write ("Enter the name of the room: ");
 		}
 
 		public static void DisplayRoomDescription ()
 		{
 			Console.WriteLine ();
+			Console.WriteLine (DESIGN_SEPARATOR);
 			Console.WriteLine ("Room Description");
+			Console.WriteLine (DESIGN_SEPARATOR);
 			Console.WriteLine ("Please provide the description of the room.");
 			Console.Write ("Enter: ");
 		}
@@ -175,7 +194,9 @@ namespace SimpleCastleSales.View.Utility
 		public static void DisplayFeatureAddition ()
 		{
 			Console.Clear ();
+			Console.WriteLine (DESIGN_SEPARATOR);
 			Console.WriteLine ("Feature Addition");
+			Console.WriteLine (DESIGN_SEPARATOR);
 			Console.WriteLine ("Please enter a feature.");
 			Console.Write ("Enter: ");
 		}
@@ -184,7 +205,9 @@ namespace SimpleCastleSales.View.Utility
 		public static void DisplayHistoricalEventAddition ()
 		{
 			Console.Clear ();
+			Console.WriteLine (DESIGN_SEPARATOR);
 			Console.WriteLine ("Historical Event Addition");
+			Console.WriteLine (DESIGN_SEPARATOR);
 			Console.WriteLine ("Please enter a historical event description.");
 			Console.Write ("Enter: ");
 		}
@@ -202,19 +225,23 @@ namespace SimpleCastleSales.View.Utility
 		#region CastleViewing
 		public static void DisplayCastleSearchByCharacteristic ()
 		{
+			Console.WriteLine (DESIGN_SEPARATOR);
+			Console.WriteLine ("Search Characteristic");
+			Console.WriteLine (DESIGN_SEPARATOR);
+			Console.WriteLine ();
 			Console.WriteLine ("What Characteristic/Feature would you like to search by?");
 			Console.WriteLine ("Examples: 'has a moat', 'has a drawbridge'");
 			Console.Write ("Enter: ");
 		}
 
-		public static void FormatAndDisplayCastles (Dictionary<string, Dictionary<string, List<string>>> castlesInfo)
+		public static void FormatAndDisplayCastles (string menuTitle, Dictionary<string, Dictionary<string, List<string>>> castlesInfo)
 		{
 			const string INDENT = "  ";
 			const string SEPERATOR = "---------------------------------";
 
 			Console.Clear ();
 			Console.WriteLine (SEPERATOR);
-			Console.WriteLine ("Castle List View");
+			Console.WriteLine (menuTitle);
 			Console.WriteLine (SEPERATOR);
 			foreach (var castle in castlesInfo)
 			{
@@ -276,6 +303,12 @@ namespace SimpleCastleSales.View.Utility
 		{
 			Console.WriteLine ("You have no castles in your wishlist to display.");
 			DisplayContinue ("Press any key to return to account page...");
+		}
+
+		public static void ErrorNoCastlesToDisplay ()
+		{
+			Console.WriteLine ("There are no castles to view.");
+			DisplayContinue (GENERIC_CONTINUE);
 		}
 		#endregion
 	}
