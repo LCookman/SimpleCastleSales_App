@@ -10,8 +10,14 @@ When first designing the app I had a couple thoughts in mind. The first being, a
 
 Another thought I had when designing the backend was that I initially wanted to have the Model hold a list of Castle objects and from there have each Castle hold a singular list of IStringable objects. These IStringable objects would represent a castles components (i.e. rooms, features, and historical events). This way I would only ever have to operate on a singular list of objects. This became an issue when sending data back to the view and then later searching for specific characteristics within a castle. The only way I could see accomplishing this idea of using a singular list would have been to do a lot of type checking and casting which seemed quite dirty. Instead I made the castle hold a list for each of it's components so I knew what was being sent back to the view as well as the view also knew what it was receiving.
 
-## What would I do Differently
+## What Would I Do Differently
 There is one major aspect of this code sample that I would have loved to do differently granted I had some more time to implement it. The aspect is simply moving data from the model back to the view for display. I mentioned earlier that this was initially an issue, but in hindsight the whole transferring of data could have been much easier. Instead of transferring Dictionary objects back to the view I wish I would have used JSON Serialization and Deserialization instead. That way regardless of what types of objects where in a list I could serialize all the objects within the list and send them to the view and then the view would know how to pick those objects apart and display them.
 
 ## Time Spent
+Overall I spent about 24hrs on this project, although I needed to learn a lot about the constructs I was using, such as Linq and the testing framework.
 
+Design: ~2hrs
+
+MVP: ~20hrs
+
+Testing: ~2hrs
