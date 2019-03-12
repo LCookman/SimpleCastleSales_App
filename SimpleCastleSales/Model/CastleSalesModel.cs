@@ -8,10 +8,9 @@ namespace SimpleCastleSales.Model
 	/// <summary>
 	/// The model for the Simple Castle Sales (SCS) Application.
 	/// </summary>
-	class CastleSalesModel
+	public class CastleSalesModel
 	{
-		private Account mcLoggedInUser = null;
-
+		private Account mLoggedInUser = null;
 		private Dictionary<string, Account> mCreatedUsers;
 		private List<Castle> mListedCastles;
 
@@ -36,7 +35,7 @@ namespace SimpleCastleSales.Model
 				Account accnt = mCreatedUsers.GetValueOrDefault (username);
 				if (accnt.Verify (password))
 				{
-					mcLoggedInUser = accnt;
+					mLoggedInUser = accnt;
 					bAuthenticated = true;
 				}
 			}
@@ -48,7 +47,7 @@ namespace SimpleCastleSales.Model
 		/// </summary>
 		public void Logout ()
 		{
-			mcLoggedInUser = null;
+			mLoggedInUser = null;
 		}
 
 		/// <summary>
@@ -69,7 +68,7 @@ namespace SimpleCastleSales.Model
 				mCreatedUsers.Add (username, new Account (username, password));
 				bIsCreated = true;
 
-				mcLoggedInUser = newUser;
+				mLoggedInUser = newUser;
 			}
 			return bIsCreated;
 		}
@@ -96,7 +95,7 @@ namespace SimpleCastleSales.Model
 			}
 			else
 			{
-				newCastle = new Castle (mcLoggedInUser.UID, castleName);
+				newCastle = new Castle (mLoggedInUser.UID, castleName);
 			}
 
 			foreach (Tuple<string, string> room in rooms)
@@ -132,8 +131,7 @@ namespace SimpleCastleSales.Model
 
 			if (toSave != null)
 			{
-				mcLoggedInUser.AddCastleToWishlist (toSave);
-				bExists = true;
+				bExists = mLoggedInUser.AddCastleToWishlist (toSave);
 			}
 			return bExists;
 		}
@@ -183,7 +181,7 @@ namespace SimpleCastleSales.Model
 			Dictionary<string, Dictionary<string, List<string>>> castlesData =
 				new Dictionary<string, Dictionary<string, List<string>>> ();
 
-			foreach (Castle castle in mcLoggedInUser.FetchWishlist ())
+			foreach (Castle castle in mLoggedInUser.FetchWishlist ())
 			{
 				castlesData.Add (castle.Name, castle.FetchCastleInfo ());
 			}

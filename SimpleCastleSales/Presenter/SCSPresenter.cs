@@ -8,13 +8,13 @@ namespace SimpleCastleSales.Presenter
 	/// </summary>
 	public class SCSPresenter
 	{
-		private IView mcView;
-		private CastleSalesModel mcModel;
+		private IView mView;
+		private CastleSalesModel mModel;
 	
-		public SCSPresenter (IView view)
+		public SCSPresenter (IView view, CastleSalesModel model)
 		{
-			mcView = view;
-			mcModel = new CastleSalesModel ();
+			mView = view;
+			mModel = model;
 
 			RegisterEvents ();
 		}
@@ -25,14 +25,14 @@ namespace SimpleCastleSales.Presenter
 		/// </summary>
 		private void RegisterEvents ()
 		{
-			mcView.OnLoginEvent += mcModel.Login;
-			mcView.OnLogoutEvent += mcModel.Logout;
-			mcView.OnCreateUserEvent += mcModel.CreateUserAccount;
-			mcView.OnCastleSaveEvent += mcModel.CreateCastleFromEditor;
-			mcView.OnSearchAllEvent += mcModel.FetchAllCastles;
-			mcView.OnCharacteristicSearch += mcModel.SearchCastleByCharacteristic;
-			mcView.OnSaveToWishlistEvent += mcModel.SaveToUserWishlist;
-			mcView.OnFetchUserWishlistEvent += mcModel.FetchUserWishlist;
+			mView.OnLoginEvent += mModel.Login;
+			mView.OnLogoutEvent += mModel.Logout;
+			mView.OnCreateUserEvent += mModel.CreateUserAccount;
+			mView.OnCastleSaveEvent += mModel.CreateCastleFromEditor;
+			mView.OnSearchAllEvent += mModel.FetchAllCastles;
+			mView.OnCharacteristicSearch += mModel.SearchCastleByCharacteristic;
+			mView.OnSaveToWishlistEvent += mModel.SaveToUserWishlist;
+			mView.OnFetchUserWishlistEvent += mModel.FetchUserWishlist;
 		}
 	}
 }

@@ -4,7 +4,7 @@ using SimpleCastleSales.View.Utility;
 
 namespace SimpleCastleSales.View
 {
-	class ConsoleView : IView
+	public class ConsoleView : IView
 	{
 		public event LoginEventHandler OnLoginEvent;
 		public event LogoutEventHandler OnLogoutEvent;
@@ -34,7 +34,6 @@ namespace SimpleCastleSales.View
 			const int EXIT = 3;
 
 			bool bExit = false;
-
 			string userInput;
 			int answer;
 
@@ -69,7 +68,7 @@ namespace SimpleCastleSales.View
 		/// <summary>
 		/// The login page for a user.
 		/// </summary>
-		private bool Login ()
+		public bool Login ()
 		{
 			bool bLoggedIn = false;
 			string username, password;
@@ -97,7 +96,7 @@ namespace SimpleCastleSales.View
 		/// <summary>
 		/// Logout the user from the app and return to home page.
 		/// </summary>
-		private void Logout ()
+		public void Logout ()
 		{
 			OnLogoutEvent ();
 			mLoggedInUsername = "";
@@ -107,7 +106,7 @@ namespace SimpleCastleSales.View
 		/// Create a new user account. If an account is already created
 		/// with the given username, it will ask you to try another username.
 		/// </summary>
-		private bool CreateAccount ()
+		public bool CreateAccount ()
 		{
 			bool bCreated;
 			string username, password;
@@ -136,7 +135,7 @@ namespace SimpleCastleSales.View
 		/// <summary>
 		/// Display the account page and it's options.
 		/// </summary>
-		private void AccountPage ()
+		public void AccountPage ()
 		{
 			const int MIN_ANSWER = 1;
 			const int MAX_ANSWER = 4;
@@ -182,7 +181,7 @@ namespace SimpleCastleSales.View
 		/// for a castle. This method calls the OnCastleSaveEvent in order
 		/// to save the user input data.
 		/// </summary>
-		private void CreateCastle ()
+		public void CreateCastle ()
 		{
 			int answer;
 			bool bCreating = true;
@@ -263,7 +262,7 @@ namespace SimpleCastleSales.View
 		/// castles. Either displaying all the castles or searching
 		/// based on a specific characteristic of a castle.
 		/// </summary>
-		private void SearchCastles ()
+		public void SearchCastles ()
 		{
 			const int MIN_ANSWER = 1;
 			const int MAX_ANSWER = 3;
@@ -313,7 +312,7 @@ namespace SimpleCastleSales.View
 		/// castles. This method simply displays the wishlist and any button
 		/// pressed can exit the wishlist back to the account page.
 		/// </summary>
-		private void ViewWishlist ()
+		public void ViewWishlist ()
 		{
 			var castleList = OnFetchUserWishlistEvent ();
 
@@ -335,11 +334,11 @@ namespace SimpleCastleSales.View
 		/// wishlist.
 		/// </summary>
 		/// <param name="castlesInfo">The list of castles to display to the user.</param>
-		private void WishlistAdditionCastleView (Dictionary<string, Dictionary<string, List<string>>> castlesInfo)
+		public void WishlistAdditionCastleView (Dictionary<string, Dictionary<string, List<string>>> castlesInfo)
 		{
 			bool bExit = false;
-			int answer;
 			string userInput, castleName;
+			int answer;
 
 			while (!bExit)
 			{

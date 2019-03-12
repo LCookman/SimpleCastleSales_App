@@ -9,7 +9,8 @@ namespace SimpleCastleSales.Model.Structure
 		private static int CID_Generator = 1;
 
 		private readonly int mCreatorIdentifier;
-		private readonly int CID;
+		private readonly int mCID;
+
 		public string Name { get; }
 
 		private List<Feature> mFeatures;
@@ -18,7 +19,7 @@ namespace SimpleCastleSales.Model.Structure
 
 		public Castle (int creatorIdentifier, string castleName)
 		{
-			CID = CID_Generator++;
+			mCID = CID_Generator++;
 			mCreatorIdentifier = creatorIdentifier;
 			Name = castleName;
 

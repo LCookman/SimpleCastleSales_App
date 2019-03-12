@@ -9,19 +9,17 @@ namespace SimpleCastleSales.Model
 	/// </summary>
 	public class Account
 	{
-		private static int CurrentNewUserID = 0;
+		private static int UID_Generator = 0;
 
-		private string mPassword;
+		private readonly string mPassword;
+		private List<Castle> mUserWishlist;
 
-		// The User Account Properties.
 		public int UID { get; }
 		public string Username { get; }
 
-		List<Castle> mUserWishlist;
-
 		public Account (string username, string password)
 		{
-			UID = CurrentNewUserID++;
+			UID = UID_Generator++;
 			Username = username;
 			mPassword = password;
 
@@ -44,9 +42,14 @@ namespace SimpleCastleSales.Model
 		/// Adds a castle to the users wishlist.
 		/// </summary>
 		/// <param name="castle">The castle to add to the wishlist.</param>
-		public void AddCastleToWishlist (Castle castle)
+		public bool AddCastleToWishlist (Castle castle)
 		{
-			mUserWishlist.Add (castle);
+			bool bContains = mUserWishlist.Contains (castle);
+			if (!bContains)
+			{
+				mUserWishlist.Add (castle);
+			}
+			return !bContains;
 		}
 
 		/// <summary>
