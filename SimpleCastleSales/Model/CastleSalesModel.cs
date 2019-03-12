@@ -83,6 +83,7 @@ namespace SimpleCastleSales.Model
 		/// <param name="rooms">The list of rooms in a castle</param>
 		public bool CreateCastleFromEditor (
 			string castleName,
+			int price,
 			List<string> features,
 			List<string> histEvents,
 			List<Tuple<string, string>> rooms)
@@ -95,7 +96,7 @@ namespace SimpleCastleSales.Model
 			}
 			else
 			{
-				newCastle = new Castle (mLoggedInUser.UID, castleName);
+				newCastle = new Castle (mLoggedInUser.UID, castleName, price);
 			}
 
 			foreach (Tuple<string, string> room in rooms)

@@ -80,13 +80,14 @@ namespace CastleConsoleTests
 			// Since the castle takes the UID of the user who created it, it
 			// makes sense that creating a castle while not logged in will
 			// throw a Null Reference Exception.
-			OnCastleSaveEvent (castleName, features, histEvents, rooms);
+			OnCastleSaveEvent (castleName, 1000000, features, histEvents, rooms);
 		}
 
 		[TestMethod]
 		[ExpectedException (typeof (NullReferenceException))]
 		public void TestCastleCreationAfterLogout ()
 		{
+			int price = 1000000;
 			string castleName = "Testing Castle";
 			List<string> features = new List<string> () { "Feature1", "Feature2", "Feature3" };
 			List<string> histEvents = new List<string> () { "HistEvent1", "HistEvent2" };
@@ -99,18 +100,19 @@ namespace CastleConsoleTests
 			OnCreateUserEvent ("Logan", "test");
 
 			// Save a new castle on that account.
-			Assert.IsTrue (OnCastleSaveEvent (castleName, features, histEvents, rooms));
+			Assert.IsTrue (OnCastleSaveEvent (castleName, price, features, histEvents, rooms));
 
 			// Logout the user
 			OnLogoutEvent ();
 
 			// Try and create a new castle while logged out.
-			OnCastleSaveEvent ("New Castle Name", features, histEvents, rooms);
+			OnCastleSaveEvent ("New Castle Name", price, features, histEvents, rooms);
 		}
 
 		[TestMethod]
 		public void TestCastleCreationWithUser ()
 		{
+			int price = 1000000;
 			string castleName = "Testing Castle";
 			List<string> features = new List<string> () { "Feature1", "Feature2", "Feature3" };
 			List<string> histEvents = new List<string> () { "HistEvent1", "HistEvent2" };
@@ -123,18 +125,19 @@ namespace CastleConsoleTests
 			OnCreateUserEvent ("Logan", "test");
 
 			// Test if we can create a castle now.
-			Assert.IsTrue (OnCastleSaveEvent (castleName, features, histEvents, rooms));
+			Assert.IsTrue (OnCastleSaveEvent (castleName, price, features, histEvents, rooms));
 
 			// Try creating the same exact castle - this will fail.
-			Assert.IsFalse (OnCastleSaveEvent (castleName, features, histEvents, rooms));
+			Assert.IsFalse (OnCastleSaveEvent (castleName, price, features, histEvents, rooms));
 
 			// Create the same castle with a different name - this will pass.
-			Assert.IsTrue (OnCastleSaveEvent ("New Castle Name", features, histEvents, rooms));
+			Assert.IsTrue (OnCastleSaveEvent ("New Castle Name", price, features, histEvents, rooms));
 		}
 
 		[TestMethod]
 		public void TestCastleSearching ()
 		{
+			int price = 1000000;
 			string castleName = "Testing Castle";
 			List<string> features = new List<string> () { "Feature1" };
 			List<string> histEvents = new List<string> () { "HistEvent1" };
@@ -150,7 +153,7 @@ namespace CastleConsoleTests
 			OnCreateUserEvent ("Logan", "test");
 
 			// Test if we can create a castle now.
-			Assert.IsTrue (OnCastleSaveEvent (castleName, features, histEvents, rooms));
+			Assert.IsTrue (OnCastleSaveEvent (castleName, price, features, histEvents, rooms));
 
 			// Since we only insert one castle it's all we will pull out.
 			castleData = OnSearchAllEvent ();
@@ -169,6 +172,10 @@ namespace CastleConsoleTests
 							Assert.AreEqual (roomArray[0], room1.Item1);
 							Assert.AreEqual (roomArray[1], room1.Item2);
 						}
+						else if (infoList.Key.Equals ("Price", StringComparison.InvariantCultureIgnoreCase))
+						{
+							Assert.AreEqual (price, Convert.ToInt32 (info));
+						}
 						else if (infoList.Key.Equals ("Features", StringComparison.InvariantCultureIgnoreCase))
 						{
 							Assert.AreEqual (info, "Feature1");
@@ -185,6 +192,7 @@ namespace CastleConsoleTests
 		[TestMethod]
 		public void TestCastleSearchByCharacteristic ()
 		{
+			int price = 1000000;
 			string castleName = "Testing Castle";
 			List<string> features1 = new List<string> () { "Feature1" };
 			List<string> features2 = new List<string> () { "Feature2" };
@@ -199,9 +207,9 @@ namespace CastleConsoleTests
 			// Create the user and get logged in.
 			OnCreateUserEvent ("Logan", "test");
 
-			Assert.IsTrue (OnCastleSaveEvent (castleName, features1, histEvents, rooms));
-			Assert.IsTrue (OnCastleSaveEvent ("New Castle Name", features2, histEvents, rooms));
-			Assert.IsTrue (OnCastleSaveEvent ("Castle Name 2.0", features1, histEvents, rooms));
+			Assert.IsTrue (OnCastleSaveEvent (castleName, price, features1, histEvents, rooms));
+			Assert.IsTrue (OnCastleSaveEvent ("New Castle Name", price, features2, histEvents, rooms));
+			Assert.IsTrue (OnCastleSaveEvent ("Castle Name 2.0", price, features1, histEvents, rooms));
 
 			// Perform a search on Feature1
 			castleData = OnCharacteristicSearch ("has a Feature1");
@@ -219,6 +227,7 @@ namespace CastleConsoleTests
 		[TestMethod]
 		public void TestUserSaveCastleToWishlist ()
 		{
+			int price = 1000000;
 			string castleName = "Testing Castle";
 			List<string> features = new List<string> () { "Feature1" };
 			List<string> histEvents = new List<string> () { "HistEvent1" };
@@ -231,9 +240,9 @@ namespace CastleConsoleTests
 			// Create the user and get logged in.
 			OnCreateUserEvent ("Logan", "test");
 
-			Assert.IsTrue (OnCastleSaveEvent (castleName, features, histEvents, rooms));
-			Assert.IsTrue (OnCastleSaveEvent ("New Castle Name", features, histEvents, rooms));
-			Assert.IsTrue (OnCastleSaveEvent ("Castle Name 2.0", features, histEvents, rooms));
+			Assert.IsTrue (OnCastleSaveEvent (castleName, price, features, histEvents, rooms));
+			Assert.IsTrue (OnCastleSaveEvent ("New Castle Name", price, features, histEvents, rooms));
+			Assert.IsTrue (OnCastleSaveEvent ("Castle Name 2.0", price, features, histEvents, rooms));
 
 			// Save some castles to the wishlist.
 			Assert.IsTrue (OnSaveToWishlistEvent ("New Castle Name"));

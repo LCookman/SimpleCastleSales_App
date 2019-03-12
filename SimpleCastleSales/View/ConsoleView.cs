@@ -183,7 +183,7 @@ namespace SimpleCastleSales.View
 		/// </summary>
 		public void CreateCastle ()
 		{
-			int answer;
+			int answer, price = 0;
 			bool bCreating = true;
 			string userInput, castleName;
 			string tempRoomName, tempRoomDescription;
@@ -194,13 +194,14 @@ namespace SimpleCastleSales.View
 			histEvents = new List<string> ();
 			rooms = new List<Tuple<string, string>> ();
 
-			ConsoleDisplay.DisplayNameCastle ();
-			castleName = Console.ReadLine ();
+			castleName = ConsoleUtil.UserInputNewCastleName ();
+			price = ConsoleUtil.UserInputNewPrice ();
 
 			while (bCreating)
 			{
 				ConsoleDisplay.DisplayCastleCreateMenu (
 					castleName,
+					price,
 					features,
 					histEvents,
 					rooms);
@@ -212,11 +213,15 @@ namespace SimpleCastleSales.View
 				{
 					case 1:
 						// Edit Name Here
-						ConsoleDisplay.DisplayNameCastle ();
-						castleName = Console.ReadLine ();
+						castleName = ConsoleUtil.UserInputNewCastleName ();
 						break;
 
 					case 2:
+						ConsoleDisplay.DisplayPriceOfCastle ();
+						price = ConsoleUtil.UserInputNewPrice ();
+						break;
+
+					case 3:
 						//Add Room + Description
 						ConsoleDisplay.DisplayRoomAddition ();
 						tempRoomName = Console.ReadLine ();
@@ -226,21 +231,21 @@ namespace SimpleCastleSales.View
 						rooms.Add (new Tuple<string, string> (tempRoomName, tempRoomDescription));
 						break;
 
-					case 3:
+					case 4:
 						//Add Feature
 						ConsoleDisplay.DisplayFeatureAddition ();
 						features.Add (Console.ReadLine ());
 						break;
 
-					case 4:
+					case 5:
 						//Add Historical Event
 						ConsoleDisplay.DisplayHistoricalEventAddition ();
 						histEvents.Add (Console.ReadLine ());
 						break;
 
-					case 5:
+					case 6:
 						//Save Castle
-						if (!OnCastleSaveEvent (castleName, features, histEvents, rooms))
+						if (!OnCastleSaveEvent (castleName, price, features, histEvents, rooms))
 						{
 							ConsoleDisplay.ErrorCastleNameAlreadyTaken ();
 						}
@@ -250,7 +255,7 @@ namespace SimpleCastleSales.View
 						}
 						break;
 
-					case 6:
+					case 7:
 						bCreating = false;
 						break;
 				}
