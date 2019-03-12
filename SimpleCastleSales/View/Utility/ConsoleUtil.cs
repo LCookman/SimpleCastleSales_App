@@ -60,5 +60,20 @@ namespace SimpleCastleSales.View.Utility
 			}
 			return answer;
 		}
+
+		/// <summary>
+		/// Check if the collection of castles has more than 0 elements.
+		/// </summary>
+		/// <param name="castleInfoSize">The size of the castle info collection</param>
+		/// <returns>True if the collection has zero elements false if there are elements.</returns>
+		public static bool CheckEmptyCastleCollection (int castleInfoSize)
+		{
+			bool bHasNoElements = castleInfoSize < 1;
+			if (bHasNoElements)
+			{
+				ConsoleDisplay.ErrorNoCastlesToDisplay ();
+			}
+			return bHasNoElements;
+		}
 	}
 }
