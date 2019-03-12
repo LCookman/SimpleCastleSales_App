@@ -12,16 +12,18 @@ namespace SimpleCastleSales.Model.Structure
 		private readonly int mCID;
 
 		public string Name { get; }
+		public int Price { get; }
 
 		private List<Feature> mFeatures;
 		private List<Room> mRooms;
 		private List<HistoricalEvent> mHistEvents;
 
-		public Castle (int creatorIdentifier, string castleName)
+		public Castle (int creatorIdentifier, string castleName, int cPrice)
 		{
 			mCID = CID_Generator++;
 			mCreatorIdentifier = creatorIdentifier;
 			Name = castleName;
+			Price = cPrice;
 
 			mFeatures = new List<Feature> ();
 			mRooms = new List<Room> ();
@@ -64,6 +66,7 @@ namespace SimpleCastleSales.Model.Structure
 		{
 			Dictionary<string, List<string>> dictList = new Dictionary<string, List<string>>
 			{
+				{ "Price", new List<string> () {Price.ToString ()} },
 				{ "Rooms", new List<string> (mRooms.Select (room => room.ToString ())) },
 				{ "Features", new List<string> (mFeatures.Select (feat => feat.ToString ())) },
 				{ "Historical Events", new List<string> (mHistEvents.Select (evnts => evnts.ToString ())) }

@@ -47,6 +47,7 @@ namespace SimpleCastleSales.View.Utility
 
 		public static void DisplayCastleCreateMenu (
 			string castleName,
+			int price,
 			List<string> features, 
 			List<string> histEvents, 
 			List<Tuple<string, string>> rooms)
@@ -60,7 +61,12 @@ namespace SimpleCastleSales.View.Utility
 			Console.WriteLine ("Current Castle Name: {0}", castleName);
 			Console.WriteLine ();
 			Console.WriteLine ("1. Edit Name");
-			Console.WriteLine ("2. Add Room and Description");
+			Console.WriteLine ("2. Edit Price of Castle");
+			if (price > 0)
+			{
+				Console.WriteLine ($"    Current Price: {price}");
+			}
+			Console.WriteLine ("3. Add Room and Description");
 			if (rooms.Count > 0)
 			{
 				foreach (Tuple<string, string> room in rooms)
@@ -69,7 +75,7 @@ namespace SimpleCastleSales.View.Utility
 					Console.WriteLine ("    - {0}", room.Item2);
 				}
 			}
-			Console.WriteLine ("3. Add Feature");
+			Console.WriteLine ("4. Add Feature");
 			if (features.Count > 0)
 			{
 				foreach (string feat in features)
@@ -77,7 +83,7 @@ namespace SimpleCastleSales.View.Utility
 					Console.WriteLine (ADDITION_PREFIX, feat);
 				}
 			}
-			Console.WriteLine ("4. Add Historical Event");
+			Console.WriteLine ("5. Add Historical Event");
 			if (histEvents.Count > 0)
 			{
 				foreach (string historyEvent in histEvents)
@@ -85,8 +91,8 @@ namespace SimpleCastleSales.View.Utility
 					Console.WriteLine (ADDITION_PREFIX, historyEvent);
 				}
 			}
-			Console.WriteLine ("5. Save Castle");
-			Console.WriteLine ("6. Exit Castle Editor");
+			Console.WriteLine ("6. Save Castle");
+			Console.WriteLine ("7. Exit Castle Editor");
 			Console.Write ("Enter: ");
 		}
 
@@ -172,6 +178,16 @@ namespace SimpleCastleSales.View.Utility
 			Console.Write ("Enter a castle name: ");
 		}
 
+		public static void DisplayPriceOfCastle ()
+		{
+			Console.Clear ();
+			Console.WriteLine (DESIGN_SEPARATOR);
+			Console.WriteLine ("Edit Castle Price");
+			Console.WriteLine (DESIGN_SEPARATOR);
+			Console.WriteLine ("Castle price must be more than $0");
+			Console.Write ("Enter a castle price: ");
+		}
+
 		public static void DisplayRoomAddition ()
 		{
 			Console.Clear ();
@@ -216,6 +232,12 @@ namespace SimpleCastleSales.View.Utility
 		{
 			Console.WriteLine ("Castle name already taken, please modify the current name.");
 			DisplayContinue ("Press any key to go back to castle modification.");
+		}
+
+		public static void ErrorCastleMustBeWorthMore ()
+		{
+			Console.WriteLine ("Castle must be more than $0");
+			DisplayContinue (GENERIC_CONTINUE);
 		}
 		#endregion
 
@@ -263,7 +285,6 @@ namespace SimpleCastleSales.View.Utility
 							string[] roomArray = info.Split (':');
 							Console.WriteLine (INDENT + "- Room Name: " + roomArray[0]);
 							Console.WriteLine (INDENT + "- Room Description: " + roomArray[1]);
-							Console.WriteLine ();
 						}
 						else
 						{

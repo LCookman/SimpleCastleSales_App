@@ -12,6 +12,7 @@ namespace SimpleCastleSales.View
 	public delegate void LogoutEventHandler ();
 	public delegate bool SaveCastleEventHandler (
 		string castleName,
+		int price,
 		List<string> features, 
 		List<string> histEvents,
 		List<Tuple<string, string>> rooms);

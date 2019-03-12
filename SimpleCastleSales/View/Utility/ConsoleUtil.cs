@@ -75,5 +75,39 @@ namespace SimpleCastleSales.View.Utility
 			}
 			return bHasNoElements;
 		}
+
+		/// <summary>
+		/// Loop on the name castle display until a valid name is given.
+		/// </summary>
+		/// <returns>The new name of the castle.</returns>
+		public static string UserInputNewCastleName ()
+		{
+			string name = "";
+
+			do
+			{
+				ConsoleDisplay.DisplayNameCastle ();
+				name = Console.ReadLine ();
+			} while (name.Equals (""));
+
+			return name;
+		}
+
+		/// <summary>
+		/// Loop until an accurate price is read.
+		/// </summary>
+		/// <returns>The new price of the castle.</returns>
+		public static int UserInputNewPrice ()
+		{
+			int price = 0;
+
+			do
+			{
+				ConsoleDisplay.DisplayPriceOfCastle ();
+				price = ConsoleUtil.TryUserInputConvert (Console.ReadLine ());
+			} while (price <= 0);
+
+			return price;
+		}
 	}
 }
