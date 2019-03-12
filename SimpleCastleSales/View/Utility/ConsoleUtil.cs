@@ -62,11 +62,11 @@ namespace SimpleCastleSales.View.Utility
 		}
 
 		/// <summary>
-		/// Check if the wishlist has more than 0 elements.
+		/// Check if the collection of castles has more than 0 elements.
 		/// </summary>
-		/// <param name="castleInfoSize">The size of the wishlist</param>
-		/// <returns>True if the wishlist has zero elements false if there are elements.</returns>
-		public static bool CheckEmptyWishlist (int castleInfoSize)
+		/// <param name="castleInfoSize">The size of the castle info collection</param>
+		/// <returns>True if the collection has zero elements false if there are elements.</returns>
+		public static bool CheckEmptyCastleCollection (int castleInfoSize)
 		{
 			bool bHasNoElements = castleInfoSize < 1;
 			if (bHasNoElements)

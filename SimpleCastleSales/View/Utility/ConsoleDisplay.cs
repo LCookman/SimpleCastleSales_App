@@ -248,7 +248,14 @@ namespace SimpleCastleSales.View.Utility
 				Console.WriteLine ("Castle Name: " + castle.Key);
 				foreach (var infoList in castle.Value)
 				{
-					Console.WriteLine (infoList.Key + ":");
+					if (infoList.Value.Count == 0)
+					{
+						Console.WriteLine (infoList.Key + ": None");
+					}
+					else
+					{
+						Console.WriteLine (infoList.Key + ":");
+					}
 					foreach (var info in infoList.Value)
 					{
 						if (infoList.Key.Equals ("Rooms", StringComparison.InvariantCultureIgnoreCase))
@@ -260,7 +267,7 @@ namespace SimpleCastleSales.View.Utility
 						}
 						else
 						{
-							Console.WriteLine (INDENT + "-" + info);
+							Console.WriteLine (INDENT + "- " + info);
 						}
 					}
 				}
